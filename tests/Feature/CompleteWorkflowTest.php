@@ -16,7 +16,7 @@ class CompleteWorkflowTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }
@@ -29,7 +29,7 @@ class CompleteWorkflowTest extends TestCase
 
         // Step 1: User creates dynamic resources through GUI
         echo "1. Creating dynamic resources...\n";
-        
+
         $products = DynamicResource::create([
             'name' => 'Products',
             'description' => 'Manage our product catalog',
@@ -97,16 +97,16 @@ class CompleteWorkflowTest extends TestCase
         echo "4. Testing plugin registration...\n";
         $panel = Panel::make()->id('admin');
         $plugin = FilamentResourceBuilderPlugin::make();
-        
+
         // This would normally happen during app boot
         $plugin->register($panel);
         $plugin->boot($panel);
-        
+
         echo "   ✅ Plugin registered successfully\n";
 
         // Step 5: Verify we can insert data into generated tables
         echo "5. Testing data insertion into generated tables...\n";
-        
+
         // Insert test data
         \DB::table('products')->insert([
             'title' => 'Awesome Widget',
@@ -129,7 +129,7 @@ class CompleteWorkflowTest extends TestCase
 
         $this->assertEquals('Awesome Widget', $product->title);
         $this->assertEquals('John Doe', $member->name);
-        
+
         echo "   ✅ Data inserted successfully\n";
 
         // Final summary

@@ -12,11 +12,11 @@ use Filament\Notifications\NotificationsServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
+use Fuascailtdev\FilamentResourceBuilder\FilamentResourceBuilderServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use Fuascailtdev\FilamentResourceBuilder\FilamentResourceBuilderServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -58,7 +58,7 @@ class TestCase extends Orchestra
         ]);
 
         // Load our migration
-        $migration = include __DIR__.'/../database/migrations/create_resource_builder_table.php.stub';
+        $migration = include __DIR__ . '/../database/migrations/create_resource_builder_table.php.stub';
         $migration->up();
     }
 }

@@ -7,8 +7,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Fuascailtdev\FilamentResourceBuilder\Models\DynamicResource;
 use Fuascailtdev\FilamentResourceBuilder\Models\DynamicField;
+use Fuascailtdev\FilamentResourceBuilder\Models\DynamicResource;
 use Fuascailtdev\FilamentResourceBuilder\Resources\DynamicResourceResource\Pages;
 
 class DynamicResourceResource extends Resource
@@ -35,21 +35,21 @@ class DynamicResourceResource extends Resource
                                     $set('model_name', str($state)->studly()->singular());
                                 }
                             }),
-                        
+
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(ignoreRecord: true),
-                        
+
                         Forms\Components\TextInput::make('table_name')
                             ->required()
                             ->unique(ignoreRecord: true),
-                        
+
                         Forms\Components\TextInput::make('model_name')
                             ->required(),
-                        
+
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
-                        
+
                         Forms\Components\Toggle::make('is_active')
                             ->default(true),
                     ])
@@ -68,18 +68,18 @@ class DynamicResourceResource extends Resource
                                             $set('label', str($state)->title());
                                         }
                                     }),
-                                
+
                                 Forms\Components\TextInput::make('label')
                                     ->required(),
-                                
+
                                 Forms\Components\Select::make('type')
                                     ->required()
                                     ->options(DynamicField::getFieldTypes())
                                     ->live(),
-                                
+
                                 Forms\Components\Toggle::make('required')
                                     ->default(false),
-                                
+
                                 Forms\Components\KeyValue::make('options')
                                     ->visible(fn (Forms\Get $get) => in_array($get('type'), ['select']))
                                     ->keyLabel('Option Value')
@@ -100,17 +100,17 @@ class DynamicResourceResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('table_name')
                     ->searchable(),
-                
+
                 Tables\Columns\TextColumn::make('fields_count')
                     ->counts('fields')
                     ->label('Fields'),
-                
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),

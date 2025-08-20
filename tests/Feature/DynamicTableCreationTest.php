@@ -15,7 +15,7 @@ class DynamicTableCreationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }
@@ -58,7 +58,7 @@ class DynamicTableCreationTest extends TestCase
 
         // Check if the table was created
         $this->assertTrue(Schema::hasTable('products'));
-        
+
         // Check if the table has the correct columns
         $this->assertTrue(Schema::hasColumn('products', 'id'));
         $this->assertTrue(Schema::hasColumn('products', 'title'));
@@ -82,8 +82,8 @@ class DynamicTableCreationTest extends TestCase
             'required' => true,
         ]);
 
-        $service = new DynamicTableService();
-        
+        $service = new DynamicTableService;
+
         // Create table
         $created = $service->createTable($resource);
         $this->assertTrue($created);
@@ -123,7 +123,7 @@ class DynamicTableCreationTest extends TestCase
             ]);
         }
 
-        $service = new DynamicTableService();
+        $service = new DynamicTableService;
         $service->createTable($resource);
 
         // Check all columns exist

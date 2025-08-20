@@ -100,7 +100,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [fuascailtdev](https://github.com/fuascailtdev)
+- [fuascailtdev](https://github.com/ofthewildfire)
 - [All Contributors](../../contributors)
 
 ## License

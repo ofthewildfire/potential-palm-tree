@@ -3,7 +3,6 @@
 namespace Fuascailtdev\FilamentResourceBuilder\Tests\Feature;
 
 use Filament\Panel;
-use Filament\PanelProvider;
 use Fuascailtdev\FilamentResourceBuilder\FilamentResourceBuilderPlugin;
 use Fuascailtdev\FilamentResourceBuilder\Resources\DynamicResourceResource;
 use Fuascailtdev\FilamentResourceBuilder\Tests\TestCase;
@@ -16,7 +15,7 @@ class FilamentResourceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }
@@ -35,7 +34,7 @@ class FilamentResourceTest extends TestCase
     public function it_registers_the_dynamic_resource_resource()
     {
         $resources = [DynamicResourceResource::class];
-        
+
         $this->assertContains(DynamicResourceResource::class, $resources);
         $this->assertEquals('Resource Builder', DynamicResourceResource::getNavigationLabel());
     }

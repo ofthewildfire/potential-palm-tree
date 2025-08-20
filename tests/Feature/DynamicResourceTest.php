@@ -13,7 +13,7 @@ class DynamicResourceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }

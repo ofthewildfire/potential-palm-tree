@@ -32,12 +32,12 @@ class FilamentResourceBuilderPlugin implements Plugin
     {
         try {
             // Only try to register if database is available
-            if (!app()->runningInConsole() || app()->runningUnitTests()) {
+            if (! app()->runningInConsole() || app()->runningUnitTests()) {
                 $registrationService = app(\Fuascailtdev\FilamentResourceBuilder\Services\DynamicResourceRegistrationService::class);
-                
+
                 $resourceClasses = $registrationService->generateResourceClasses();
-                
-                if (!empty($resourceClasses)) {
+
+                if (! empty($resourceClasses)) {
                     $panel->resources($resourceClasses);
                 }
             }

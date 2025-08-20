@@ -16,7 +16,7 @@ class EndToEndTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }
@@ -90,7 +90,7 @@ class EndToEndTest extends TestCase
         $this->assertTrue((bool) $product->is_featured);
 
         // 7. Test Filament resource generation
-        $filamentService = new DynamicFilamentResourceService();
+        $filamentService = new DynamicFilamentResourceService;
         $formFields = $filamentService->createFormFields($resource);
         $tableColumns = $filamentService->createTableColumns($resource);
 
@@ -101,7 +101,7 @@ class EndToEndTest extends TestCase
         echo "\n🎉 SUCCESS! Your dynamic resource system works!\n";
         echo "✅ Created 'products' table with 4 custom fields\n";
         echo "✅ Inserted test data successfully\n";
-        echo "✅ Generated " . count($formFields) . " form fields\n";
-        echo "✅ Generated " . count($tableColumns) . " table columns\n";
+        echo '✅ Generated ' . count($formFields) . " form fields\n";
+        echo '✅ Generated ' . count($tableColumns) . " table columns\n";
     }
 }

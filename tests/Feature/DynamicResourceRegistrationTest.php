@@ -14,7 +14,7 @@ class DynamicResourceRegistrationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Run our migrations
         $this->artisan('migrate', ['--database' => 'testing']);
     }
@@ -40,19 +40,19 @@ class DynamicResourceRegistrationTest extends TestCase
         ]);
 
         // Generate resource classes
-        $service = new DynamicResourceRegistrationService();
+        $service = new DynamicResourceRegistrationService;
         $resourceClasses = $service->generateResourceClasses();
 
         // Should have generated 2 classes
         $this->assertCount(2, $resourceClasses);
-        
+
         // Each should be a valid class name
         foreach ($resourceClasses as $className) {
             $this->assertTrue(class_exists($className), "Class {$className} should exist");
         }
 
         echo "\n✅ Generated " . count($resourceClasses) . " dynamic resource classes!\n";
-        
+
         foreach ($resourceClasses as $className) {
             echo "  - {$className}\n";
         }
@@ -84,7 +84,7 @@ class DynamicResourceRegistrationTest extends TestCase
         ]);
 
         // Generate resource classes
-        $service = new DynamicResourceRegistrationService();
+        $service = new DynamicResourceRegistrationService;
         $resourceClasses = $service->generateResourceClasses();
 
         // Should only have 1 class (the active one)
@@ -97,8 +97,8 @@ class DynamicResourceRegistrationTest extends TestCase
     public function it_handles_empty_dynamic_resources_gracefully()
     {
         // No dynamic resources exist
-        
-        $service = new DynamicResourceRegistrationService();
+
+        $service = new DynamicResourceRegistrationService;
         $resourceClasses = $service->generateResourceClasses();
 
         // Should return empty array
