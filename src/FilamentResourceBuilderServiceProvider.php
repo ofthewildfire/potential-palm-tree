@@ -144,7 +144,7 @@ class FilamentResourceBuilderServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_resource_builder_tables',
+            'create_resource_builder_table',
         ];
     }
 }
