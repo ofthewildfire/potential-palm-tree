@@ -100,9 +100,7 @@ class FilamentResourceBuilderServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filament-resource-builder', __DIR__ . '/../resources/dist/components/filament-resource-builder.js'),
-            Css::make('filament-resource-builder-styles', __DIR__ . '/../resources/dist/filament-resource-builder.css'),
-            Js::make('filament-resource-builder-scripts', __DIR__ . '/../resources/dist/filament-resource-builder.js'),
+            // No assets needed for this plugin currently
         ];
     }
 
