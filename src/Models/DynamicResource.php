@@ -2,22 +2,18 @@
 
 namespace Fuascailtdev\FilamentResourceBuilder\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Filament\Facades\Filament;
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DynamicResource extends Model
 {
-
-
     public function team(): BelongsTo
     {
         // Dynamically get the tenant model from the host app's Filament config
         return $this->belongsTo(Filament::getTenantModel());
     }
-
 
     protected $fillable = [
         'name',
@@ -26,7 +22,7 @@ class DynamicResource extends Model
         'model_name',
         'description',
         'is_active',
-        'team_id'
+        'team_id',
     ];
 
     protected $casts = [
@@ -80,34 +76,33 @@ class DynamicResource extends Model
     //     });
     // }
 
-
     protected static function boot()
-{
-    parent::boot();
+    {
+        parent::boot();
 
-    static::creating(function ($model) {
-        // Auto-assign current tenant
-        if (\Filament\Facades\Filament::hasTenancy() && \Filament\Facades\Filament::getTenant()) {
-            $model->team_id = \Filament\Facades\Filament::getTenant()->getKey();
-        }
+        static::creating(function ($model) {
+            // Auto-assign current tenant
+            if (\Filament\Facades\Filament::hasTenancy() && \Filament\Facades\Filament::getTenant()) {
+                $model->team_id = \Filament\Facades\Filament::getTenant()->getKey();
+            }
 
-        if (! isset($model->attributes['is_active'])) {
-            $model->attributes['is_active'] = true;
-        }
-    });
+            if (! isset($model->attributes['is_active'])) {
+                $model->attributes['is_active'] = true;
+            }
+        });
 
-    static::saved(function ($model) {
-        // Create or update the database table when resource is saved
-        if ($model->is_active && $model->fields()->count() > 0) {
+        static::saved(function ($model) {
+            // Create or update the database table when resource is saved
+            if ($model->is_active && $model->fields()->count() > 0) {
+                app(\Fuascailtdev\FilamentResourceBuilder\Services\DynamicTableService::class)
+                    ->updateTable($model);
+            }
+        });
+
+        static::deleting(function ($model) {
+            // Drop the table when resource is deleted
             app(\Fuascailtdev\FilamentResourceBuilder\Services\DynamicTableService::class)
-                ->updateTable($model);
-        }
-    });
-
-    static::deleting(function ($model) {
-        // Drop the table when resource is deleted
-        app(\Fuascailtdev\FilamentResourceBuilder\Services\DynamicTableService::class)
-            ->dropTable($model);
-    });
-}
+                ->dropTable($model);
+        });
+    }
 }
