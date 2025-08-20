@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 class GenericDynamicResource extends Resource
 {
     protected static ?string $model = null; // We'll set this dynamically
-    
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     // This will hold our dynamic resource configuration
     protected static ?DynamicResource $dynamicResource = null;
 
@@ -42,13 +42,14 @@ class GenericDynamicResource extends Resource
     protected static function createDynamicModel(DynamicResource $dynamicResource): string
     {
         // Create an anonymous model class
-        $modelClass = new class extends Model {
+        $modelClass = new class extends Model
+        {
             protected $guarded = [];
         };
 
         // Set the table name
         $modelClass->setTable($dynamicResource->table_name);
-        
+
         // Set fillable fields
         $fillable = $dynamicResource->fields->pluck('name')->toArray();
         $modelClass->fillable($fillable);
@@ -58,49 +59,49 @@ class GenericDynamicResource extends Resource
 
     public static function form(Form $form): Form
     {
-        if (!static::$dynamicResource) {
+        if (! static::$dynamicResource) {
             return $form->schema([]);
         }
 
         $fields = [];
-        
+
         // Generate form fields based on the dynamic resource configuration
         foreach (static::$dynamicResource->fields as $field) {
             $formField = match ($field->type) {
                 'text' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'textarea' => Forms\Components\Textarea::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'number' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->numeric()
                     ->required($field->required),
-                
+
                 'email' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->email()
                     ->required($field->required),
-                
+
                 'checkbox' => Forms\Components\Checkbox::make($field->name)
                     ->label($field->label),
-                
+
                 'date' => Forms\Components\DatePicker::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'datetime' => Forms\Components\DateTimePicker::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'select' => Forms\Components\Select::make($field->name)
                     ->label($field->label)
                     ->options($field->options ?? [])
                     ->required($field->required),
-                
+
                 default => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
@@ -114,7 +115,7 @@ class GenericDynamicResource extends Resource
 
     public static function table(Table $table): Table
     {
-        if (!static::$dynamicResource) {
+        if (! static::$dynamicResource) {
             return $table->columns([]);
         }
 
@@ -126,11 +127,11 @@ class GenericDynamicResource extends Resource
                 'checkbox' => Tables\Columns\IconColumn::make($field->name)
                     ->label($field->label)
                     ->boolean(),
-                
+
                 'date', 'datetime' => Tables\Columns\TextColumn::make($field->name)
                     ->label($field->label)
                     ->date(),
-                
+
                 default => Tables\Columns\TextColumn::make($field->name)
                     ->label($field->label)
                     ->searchable()

@@ -43,6 +43,7 @@ class DynamicTableService
 
         if (Schema::hasTable($tableName)) {
             Schema::dropIfExists($tableName);
+
             return true;
         }
 
@@ -56,13 +57,14 @@ class DynamicTableService
     {
         $tableName = $resource->table_name;
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return $this->createTable($resource);
         }
 
         // For now, we'll recreate the table
         // In production, you'd want more sophisticated migration logic
         $this->dropTable($resource);
+
         return $this->createTable($resource);
     }
 
@@ -85,7 +87,7 @@ class DynamicTableService
         };
 
         // Make nullable if not required
-        if (!$field->required) {
+        if (! $field->required) {
             $column->nullable();
         }
     }

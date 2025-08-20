@@ -18,31 +18,34 @@ class DynamicFilamentResourceService
     public function createFilamentResource(DynamicResource $dynamicResource): string
     {
         $resourceName = $dynamicResource->model_name . 'Resource';
-        
+
         // Create a dynamic model first
         $modelClass = $this->createDynamicModel($dynamicResource);
 
         // Create the Filament resource class
-        $resourceClass = new class($modelClass, $dynamicResource) extends Resource {
+        $resourceClass = new class($modelClass, $dynamicResource) extends Resource
+        {
             protected static ?string $model = null;
+
             protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
             protected DynamicResource $dynamicResource;
 
             public function __construct($modelClass, DynamicResource $dynamicResource)
             {
-                static::$model = $modelClass;
+                self::$model = $modelClass;
                 $this->dynamicResource = $dynamicResource;
             }
 
             public static function form(Form $form): Form
             {
-                return $form->schema(static::getFormSchema());
+                return $form->schema(self::getFormSchema());
             }
 
             public static function table(Table $table): Table
             {
                 return $table
-                    ->columns(static::getTableColumns())
+                    ->columns(self::getTableColumns())
                     ->filters([])
                     ->actions([
                         Tables\Actions\EditAction::make(),
@@ -88,42 +91,42 @@ class DynamicFilamentResourceService
                 'text' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'textarea' => Forms\Components\Textarea::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'number' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->numeric()
                     ->required($field->required),
-                
+
                 'email' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->email()
                     ->required($field->required),
-                
+
                 'password' => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->password()
                     ->required($field->required),
-                
+
                 'select' => Forms\Components\Select::make($field->name)
                     ->label($field->label)
                     ->options($field->options ?? [])
                     ->required($field->required),
-                
+
                 'checkbox' => Forms\Components\Checkbox::make($field->name)
                     ->label($field->label),
-                
+
                 'date' => Forms\Components\DatePicker::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 'datetime' => Forms\Components\DateTimePicker::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
-                
+
                 default => Forms\Components\TextInput::make($field->name)
                     ->label($field->label)
                     ->required($field->required),
@@ -147,11 +150,11 @@ class DynamicFilamentResourceService
                 'checkbox' => Tables\Columns\IconColumn::make($field->name)
                     ->label($field->label)
                     ->boolean(),
-                
+
                 'date', 'datetime' => Tables\Columns\TextColumn::make($field->name)
                     ->label($field->label)
                     ->date(),
-                
+
                 default => Tables\Columns\TextColumn::make($field->name)
                     ->label($field->label)
                     ->searchable()
@@ -177,7 +180,8 @@ class DynamicFilamentResourceService
         $fillable = $resource->fields->pluck('name')->toArray();
         $tableName = $resource->table_name;
 
-        $modelClass = new class extends Model {
+        $modelClass = new class extends Model
+        {
             protected $guarded = [];
         };
 

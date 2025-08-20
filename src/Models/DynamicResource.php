@@ -9,7 +9,7 @@ class DynamicResource extends Model
 {
     protected $fillable = [
         'name',
-        'slug', 
+        'slug',
         'table_name',
         'model_name',
         'description',
@@ -45,9 +45,9 @@ class DynamicResource extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($model) {
-            if (!isset($model->attributes['is_active'])) {
+            if (! isset($model->attributes['is_active'])) {
                 $model->attributes['is_active'] = true;
             }
         });

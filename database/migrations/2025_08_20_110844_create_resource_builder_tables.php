@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('dynamic_resources', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // e.g., "Members"
-            $table->string('slug')->unique(); // e.g., "members" 
+            $table->string('slug')->unique(); // e.g., "members"
             $table->string('table_name')->unique(); // e.g., "members"
             $table->string('model_name'); // e.g., "Member"
             $table->text('description')->nullable();

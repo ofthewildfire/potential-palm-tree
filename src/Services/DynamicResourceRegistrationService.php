@@ -13,7 +13,7 @@ class DynamicResourceRegistrationService
     public function generateResourceClasses(): array
     {
         $resourceClasses = [];
-        
+
         // Get all active dynamic resources
         $dynamicResources = DynamicResource::where('is_active', true)
             ->with('fields')
@@ -34,17 +34,18 @@ class DynamicResourceRegistrationService
     {
         // Create a unique class name
         $className = $dynamicResource->model_name . 'DynamicResource';
-        
+
         // Create the class dynamically
-        $resourceClass = new class($dynamicResource) extends GenericDynamicResource {
+        $resourceClass = new class($dynamicResource) extends GenericDynamicResource
+        {
             protected DynamicResource $dynamicResourceConfig;
 
             public function __construct(DynamicResource $dynamicResource)
             {
                 $this->dynamicResourceConfig = $dynamicResource;
-                
+
                 // Configure the parent class
-                static::configureFor($dynamicResource);
+                self::configureFor($dynamicResource);
             }
 
             public static function getNavigationLabel(): string
@@ -71,7 +72,7 @@ class DynamicResourceRegistrationService
     protected function storeResourceClass(string $className, object $resourceClass, DynamicResource $dynamicResource): void
     {
         // We'll store these in a registry for later access
-        app()->singleton("dynamic_resource_{$dynamicResource->slug}", function() use ($resourceClass) {
+        app()->singleton("dynamic_resource_{$dynamicResource->slug}", function () use ($resourceClass) {
             return $resourceClass;
         });
     }
@@ -82,9 +83,9 @@ class DynamicResourceRegistrationService
     public function getRegisteredClasses(): array
     {
         $classes = [];
-        
+
         $dynamicResources = DynamicResource::where('is_active', true)->get();
-        
+
         foreach ($dynamicResources as $dynamicResource) {
             if (app()->bound("dynamic_resource_{$dynamicResource->slug}")) {
                 $resourceInstance = app("dynamic_resource_{$dynamicResource->slug}");

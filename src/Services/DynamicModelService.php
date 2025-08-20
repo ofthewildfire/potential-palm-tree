@@ -14,21 +14,22 @@ class DynamicModelService
     {
         $className = $resource->model_name;
         $tableName = $resource->table_name;
-        
+
         // Get fillable fields
         $fillable = $resource->fields->pluck('name')->toArray();
-        
+
         // Get cast types
         $casts = $this->getCasts($resource);
 
         // Create the model class dynamically
-        $modelClass = new class extends Model {
+        $modelClass = new class extends Model
+        {
             // These will be set dynamically
         };
 
         // Set the table name
         $modelClass->setTable($tableName);
-        
+
         // Set fillable fields
         $modelClass->fillable($fillable);
 
@@ -84,19 +85,23 @@ class DynamicModelService
             switch ($field->type) {
                 case 'email':
                     $fieldRules[] = 'email';
+
                     break;
                 case 'number':
                     $fieldRules[] = 'integer';
+
                     break;
                 case 'date':
                     $fieldRules[] = 'date';
+
                     break;
                 case 'datetime':
                     $fieldRules[] = 'date';
+
                     break;
             }
 
-            if (!empty($fieldRules)) {
+            if (! empty($fieldRules)) {
                 $rules[$field->name] = $fieldRules;
             }
         }
