@@ -2,9 +2,12 @@
     "name": "ofthewildfire/filament-resource-builder",
     "description": "A Filament plugin to quickly add new resources from the GUI inside Filament apps.",
     "keywords": [
-        "fuascailtdev",
+        "filament",
         "laravel",
-        "filament-resource-builder"
+        "resource-builder",
+        "dynamic-resources",
+        "cms",
+        "admin-panel"
     ],
     "homepage": "https://github.com/ofthewildfire/potential-palm-tree",
     "support": {
@@ -14,7 +17,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "fuascailtdev",
+            "name": "ofthewildfire",
             "email": "103148299+ofthewildfire@users.noreply.github.com",
             "role": "Developer"
         }
