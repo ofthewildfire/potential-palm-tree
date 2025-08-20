@@ -19,6 +19,18 @@ class DynamicResourceResource extends Resource
 
     protected static ?string $navigationLabel = 'Resource Builder';
 
+    /**
+     * Check if this resource should be available
+     */
+    public static function shouldRegisterNavigation(): bool
+    {
+        try {
+            return \Schema::hasTable('dynamic_resources');
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form

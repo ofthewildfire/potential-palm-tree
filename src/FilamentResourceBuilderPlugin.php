@@ -14,9 +14,17 @@ class FilamentResourceBuilderPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->resources([
-            \Fuascailtdev\FilamentResourceBuilder\Resources\DynamicResourceResource::class,
-        ]);
+        // Only register the resource if the database table exists
+        try {
+            if (\Schema::hasTable('dynamic_resources')) {
+                $panel->resources([
+                    \Fuascailtdev\FilamentResourceBuilder\Resources\DynamicResourceResource::class,
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Database not available, skip registration
+            \Log::debug('FilamentResourceBuilder: Could not check for dynamic_resources table: ' . $e->getMessage());
+        }
     }
 
     public function boot(Panel $panel): void
