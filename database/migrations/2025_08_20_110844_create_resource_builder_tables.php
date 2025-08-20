@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('model_name'); // e.g., "Member"
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->foreignId('team_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 

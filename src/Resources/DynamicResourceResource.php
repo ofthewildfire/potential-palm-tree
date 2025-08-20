@@ -10,6 +10,8 @@ use Filament\Tables\Table;
 use Fuascailtdev\FilamentResourceBuilder\Models\DynamicField;
 use Fuascailtdev\FilamentResourceBuilder\Models\DynamicResource;
 use Fuascailtdev\FilamentResourceBuilder\Resources\DynamicResourceResource\Pages;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Facades\Filament;
 
 class DynamicResourceResource extends Resource
 {
@@ -18,6 +20,21 @@ class DynamicResourceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static ?string $navigationLabel = 'Resource Builder';
+
+    /**
+     * Scope queries to the current tenant
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        
+        // Only apply tenant scoping if tenancy is enabled and we have a current tenant
+        if (Filament::hasTenancy() && Filament::getTenant()) {
+            return $query->whereBelongsTo(Filament::getTenant());
+        }
+        
+        return $query;
+    }
 
     /**
      * Check if this resource should be available
