@@ -1,9 +1,9 @@
 # Filament Resource Builder
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuascailtdev/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/fuascailtdev/filament-resource-builder)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/fuascailtdev/filament-resource-builder/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/fuascailtdev/filament-resource-builder/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/fuascailtdev/filament-resource-builder/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/fuascailtdev/filament-resource-builder/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/fuascailtdev/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/fuascailtdev/filament-resource-builder)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ofthewildfire/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/ofthewildfire/filament-resource-builder)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ofthewildfire/potential-palm-tree/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ofthewildfire/potential-palm-tree/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ofthewildfire/potential-palm-tree/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ofthewildfire/potential-palm-tree/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/ofthewildfire/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/ofthewildfire/filament-resource-builder)
 
 A powerful Filament plugin that allows users to create custom resources dynamically through the GUI. Build complete CRUD interfaces without writing code!
 
@@ -21,7 +21,7 @@ A powerful Filament plugin that allows users to create custom resources dynamica
 You can install the package via composer:
 
 ```bash
-composer require fuascailtdev/filament-resource-builder
+composer require ofthewildfire/filament-resource-builder
 ```
 
 You can publish and run the migrations with:
