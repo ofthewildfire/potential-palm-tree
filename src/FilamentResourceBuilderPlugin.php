@@ -21,8 +21,8 @@ class FilamentResourceBuilderPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
-        // Register dynamic resources
-        $this->registerDynamicResources($panel);
+        // Temporarily disabled to debug 500 error
+        // $this->registerDynamicResources($panel);
     }
 
     /**
