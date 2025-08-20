@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Fuascailtdev\FilamentResourceBuilder\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentResourceBuilderCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-resource-builder';
 
     public $description = 'My command';
 

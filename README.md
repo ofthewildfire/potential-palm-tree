@@ -1,62 +1,84 @@
-# :package_description
+# Filament Resource Builder
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuascailtdev/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/fuascailtdev/filament-resource-builder)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/fuascailtdev/filament-resource-builder/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/fuascailtdev/filament-resource-builder/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/fuascailtdev/filament-resource-builder/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/fuascailtdev/filament-resource-builder/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/fuascailtdev/filament-resource-builder.svg?style=flat-square)](https://packagist.org/packages/fuascailtdev/filament-resource-builder)
 
-<!--delete-->
----
-This repo can be used to scaffold a Filament plugin. Follow these steps to get started:
+A powerful Filament plugin that allows users to create custom resources dynamically through the GUI. Build complete CRUD interfaces without writing code!
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Make something great!
----
-<!--/delete-->
+## Features
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+- 🚀 **Dynamic Resource Creation** - Create resources through Filament's GUI
+- 📝 **Multiple Field Types** - Text, number, email, checkbox, date, textarea, select
+- 🗄️ **Automatic Database Tables** - Creates real database tables automatically
+- 🔄 **Live Preview** - See your resources in navigation immediately
+- 🎯 **No Code Required** - Perfect for non-developers
+- 🧩 **Filament Native** - Integrates seamlessly with existing Filament apps
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require fuascailtdev/filament-resource-builder
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
+php artisan vendor:publish --tag="filament-resource-builder-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
+## Setup
 
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
-```
-
-This is the contents of the published config file:
+Add the plugin to your Filament panel in `app/Providers/Filament/AdminPanelProvider.php`:
 
 ```php
-return [
-];
+use Fuascailtdev\FilamentResourceBuilder\FilamentResourceBuilderPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ... other configuration
+        ->plugins([
+            FilamentResourceBuilderPlugin::make(),
+        ]);
+}
 ```
 
 ## Usage
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
-```
+1. **Access the Resource Builder**: Navigate to "Resource Builder" in your Filament admin panel
+2. **Create a New Resource**: Click "Create" and enter your resource details (e.g., "Products")
+3. **Add Fields**: Use the repeater to add fields like:
+   - Product Title (text)
+   - Price (number)
+   - Description (textarea)
+   - Is Featured (checkbox)
+4. **Save**: Your resource will automatically appear in the navigation
+5. **Manage Data**: Click on your new resource to start adding and managing data
+
+## Example
+
+Creating a "Products" resource with title, price, and description fields will:
+- Create a `products` database table
+- Generate a complete Filament resource with forms and tables
+- Add "Products" to your navigation menu
+- Allow full CRUD operations on product data
+
+## Supported Field Types
+
+- **Text** - Single line text input
+- **Textarea** - Multi-line text input
+- **Number** - Numeric input
+- **Email** - Email input with validation
+- **Password** - Password input
+- **Select** - Dropdown with custom options
+- **Checkbox** - Boolean checkbox
+- **Date** - Date picker
+- **DateTime** - Date and time picker
 
 ## Testing
 
@@ -78,7 +100,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [fuascailtdev](https://github.com/fuascailtdev)
 - [All Contributors](../../contributors)
 
 ## License

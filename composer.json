@@ -1,29 +1,27 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "fuascailtdev/filament-resource-builder",
+    "description": "A Filament plugin to quickly add new resources from the GUI inside Filament apps.",
     "keywords": [
-        ":vendor_name",
+        "fuascailtdev",
         "laravel",
-        ":package_slug"
+        "filament-resource-builder"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/fuascailtdev/filament-resource-builder",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/fuascailtdev/filament-resource-builder/issues",
+        "source": "https://github.com/fuascailtdev/filament-resource-builder"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "fuascailtdev",
+            "email": "103148299+ofthewildfire@users.noreply.github.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.0",
-        "filament/forms": "^3.0",
-        "filament/tables": "^3.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -41,13 +39,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Fuascailtdev\\FilamentResourceBuilder\\": "src/",
+            "Fuascailtdev\\FilamentResourceBuilder\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Fuascailtdev\\FilamentResourceBuilder\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -67,10 +65,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Fuascailtdev\\FilamentResourceBuilder\\FilamentResourceBuilderServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FilamentResourceBuilder": "Fuascailtdev\\FilamentResourceBuilder\\Facades\\FilamentResourceBuilder"
             }
         }
     },

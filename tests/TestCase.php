@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Fuascailtdev\FilamentResourceBuilder\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Fuascailtdev\FilamentResourceBuilder\FilamentResourceBuilderServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Fuascailtdev\\FilamentResourceBuilder\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -44,17 +44,21 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            SkeletonServiceProvider::class,
+            FilamentResourceBuilderServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+        config()->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        // Load our migration
+        $migration = include __DIR__.'/../database/migrations/create_resource_builder_table.php.stub';
         $migration->up();
-        */
     }
 }
